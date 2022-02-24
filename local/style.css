@@ -1,0 +1,179 @@
+body {
+    height: 100vh;
+    background-color: darkblue;
+    font-family: 'Merienda', cursive;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game {
+    background-color: white;
+    border-radius: 5px;
+    width: 30em;
+    margin: auto;
+    padding-bottom: 1em;
+}
+
+.title {
+    background-color: lightblue;
+    padding: 0.2em;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+    font-size: 2em;
+}
+
+.info {
+    padding: 1em;
+    margin: auto;
+    position: relative;
+}
+
+.info-center {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.info-center button {
+    display: block;
+    margin: auto;
+}
+
+.info-center span {
+    display: inline-block;
+}
+
+.board {
+    margin: 1em;
+    background-color: darkblue;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: auto;
+    width: 312px;
+    height: 312px;
+    padding-left: 4px;
+    padding-top: 4px;
+}
+
+.board-item {
+    position: relative;
+    display: inline-flexbox;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+}
+
+.board-item-content {
+    font-size: 6em;
+    transform: rotateY(90deg) translateY(-18px);
+    text-align: center;
+}
+
+.board-item-active {
+    backface-visibility: visible !important;
+    animation-name: flipInY;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes flipInY {
+    0% {
+        transform:  translateY(-18px) perspective(400px) rotate3d(0, 1, 0, 90deg);
+        transition-timing-function: ease-in;
+    }
+    40% {
+        transform: translateY(-18px) perspective(400px) rotate3d(0, 1, 0, -20deg);
+        transition-timing-function: ease-in;
+    }
+    60% {
+        transform: translateY(-18px) perspective(400px) rotate3d(0, 1, 0, 10deg);
+    }
+    80% {
+        transform: translateY(-18px) perspective(400px) rotate3d(0, 1, 0, -5deg);
+    }
+    100% {
+        transform: translateY(-18px) perspective(400px);
+    }
+}
+
+.board-item-x {
+    color: blue;
+}
+
+.board-item-x::before {
+    content: 'X';
+}
+
+.board-item-o {
+    color: red;
+}
+
+.board-item-o::before {
+    content: 'O';
+}
+
+.board-item-stop-animation {
+    transform: translateY(-18px) perspective(400px);
+    animation-name: none;
+}
+
+.board-item-reset {
+    backface-visibility: visible !important;
+    animation-name: flipInY;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-direction: reverse;
+    animation-play-state: running;
+}
+
+.board-item-win {
+    animation-name: rubberBand;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rubberBand {
+    0% {
+        transform: translateY(-18px) scale3d(1, 1, 1);
+    }
+    15% {
+        transform: translateY(-18px) scale3d(1.25, 0.75, 1);
+    }
+    20% {
+        transform: translateY(-18px) scale3d(0.75, 1.25, 1);
+    }
+    25% {
+        transform: translateY(-18px) scale3d(1.15, 0.85, 1);
+    }
+    32% {
+        transform: translateY(-18px) scale3d(.95, 1.05, 1);
+    }
+    38% {
+        transform: translateY(-18px) scale3d(1.05, .95, 1);
+    }
+    50% {
+        transform: translateY(-18px) scale3d(1, 1, 1);
+    }
+    100% {
+        transform: translateY(-18px) scale3d(1, 1, 1);
+    }
+}
+
+.state-pause {
+    color: white;
+}
+
+.state-play-x, .state-x-wins {
+    color: blue;
+}
+
+.state-play-o, .state-o-wins {
+    color: red;
+}
+
+.state-draw {
+    color: green;
+}
